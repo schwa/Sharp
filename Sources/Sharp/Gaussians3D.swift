@@ -2,33 +2,33 @@ import Foundation
 import simd
 
 /// Represents a collection of 3D Gaussians for Gaussian splatting
-struct Gaussians3D: Sendable {
+public struct Gaussians3D: Sendable {
     /// Mean positions of each Gaussian [N, 3]
-    var meanVectors: [SIMD3<Float>]
+    public var meanVectors: [SIMD3<Float>]
 
     /// Singular values (scales) of each Gaussian [N, 3]
-    var singularValues: [SIMD3<Float>]
+    public var singularValues: [SIMD3<Float>]
 
     /// Quaternion rotations (w, x, y, z) for each Gaussian [N, 4]
-    var quaternions: [SIMD4<Float>]
+    public var quaternions: [SIMD4<Float>]
 
     /// RGB colors for each Gaussian [N, 3] in linear RGB
-    var colors: [SIMD3<Float>]
+    public var colors: [SIMD3<Float>]
 
     /// Opacity values for each Gaussian [N]
-    var opacities: [Float]
+    public var opacities: [Float]
 
     /// Number of Gaussians
-    var count: Int {
+    public var count: Int {
         meanVectors.count
     }
 
-    var isEmpty: Bool {
+    public var isEmpty: Bool {
         meanVectors.isEmpty
     }
 
     /// Create empty Gaussians3D
-    init() {
+    public init() {
         self.meanVectors = []
         self.singularValues = []
         self.quaternions = []
@@ -37,7 +37,7 @@ struct Gaussians3D: Sendable {
     }
 
     /// Create Gaussians3D with specified capacity
-    init(capacity: Int) {
+    public init(capacity: Int) {
         self.meanVectors = []
         self.singularValues = []
         self.quaternions = []
@@ -51,7 +51,7 @@ struct Gaussians3D: Sendable {
     }
 
     /// Create Gaussians3D with pre-allocated arrays
-    init(
+    public init(
         meanVectors: [SIMD3<Float>],
         singularValues: [SIMD3<Float>],
         quaternions: [SIMD4<Float>],

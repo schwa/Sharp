@@ -20,7 +20,7 @@ enum SharpPredictorError: Error, LocalizedError {
 }
 
 /// SHARP predictor using CoreML
-class SharpPredictor {
+final class SharpPredictor: @unchecked Sendable {
     private let model: MLModel
     private let metalProcessor: MetalProcessor?
 

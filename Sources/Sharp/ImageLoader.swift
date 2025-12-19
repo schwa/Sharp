@@ -35,17 +35,17 @@ enum ImageLoadError: Error, LocalizedError {
 }
 
 /// Result of loading an image
-struct LoadedImage: Sendable {
+public struct LoadedImage: Sendable {
     /// Pixel data as RGB floats normalized to [0, 1]
-    let pixels: [Float]
+    public let pixels: [Float]
     /// Image width
-    let width: Int
+    public let width: Int
     /// Image height
-    let height: Int
+    public let height: Int
     /// Focal length in pixels (from EXIF or estimated)
-    let focalLengthPx: Float
+    public let focalLengthPx: Float
 
-    init(pixels: [Float], width: Int, height: Int, focalLengthPx: Float) {
+    public init(pixels: [Float], width: Int, height: Int, focalLengthPx: Float) {
         self.pixels = pixels
         self.width = width
         self.height = height
