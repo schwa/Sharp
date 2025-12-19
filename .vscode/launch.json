@@ -1,0 +1,24 @@
+{
+    "configurations": [
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:sw-sharp}",
+            "name": "Debug sharp-cli",
+            "target": "sharp-cli",
+            "configuration": "debug",
+            "preLaunchTask": "swift: Build Debug sharp-cli"
+        },
+        {
+            "type": "swift",
+            "request": "launch",
+            "args": [],
+            "cwd": "${workspaceFolder:sw-sharp}",
+            "name": "Release sharp-cli",
+            "target": "sharp-cli",
+            "configuration": "release",
+            "preLaunchTask": "swift: Build Release sharp-cli"
+        }
+    ]
+}
