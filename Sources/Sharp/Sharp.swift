@@ -154,10 +154,8 @@ extension Sharp {
         to destination: URL,
         progress: (@Sendable (Double) -> Void)?
     ) async throws {
-        let delegate = DownloadDelegate(progress: progress)
-        let session = URLSession(configuration: .default, delegate: delegate, delegateQueue: nil)
-
-        let (tempURL, response) = try await session.download(from: url)
+        let delegate = DownloadProgressDelegate(progress: progress)
+        let (localURL, response) = try await URLSession.shared.download(for: URLRequest(url: url), delegate: delegate)
 
         guard let httpResponse = response as? HTTPURLResponse,
               (200...299).contains(httpResponse.statusCode) else {
@@ -169,7 +167,7 @@ extension Sharp {
         if FileManager.default.fileExists(atPath: destination.path) {
             try FileManager.default.removeItem(at: destination)
         }
-        try FileManager.default.moveItem(at: tempURL, to: destination)
+        try FileManager.default.moveItem(at: localURL, to: destination)
     }
 
     private static func unzip(fileAt zipURL: URL, to destinationDirectory: URL) throws -> URL {
@@ -233,13 +231,14 @@ extension Sharp {
     }
 }
 
-// MARK: - Download Delegate
+// MARK: - Download Progress Delegate
 
-private final class DownloadDelegate: NSObject, URLSessionDownloadDelegate, Sendable {
+private final class DownloadProgressDelegate: NSObject, URLSessionDownloadDelegate {
     private let progress: (@Sendable (Double) -> Void)?
 
     init(progress: (@Sendable (Double) -> Void)?) {
         self.progress = progress
+        super.init()
     }
 
     func urlSession(
@@ -247,7 +246,7 @@ private final class DownloadDelegate: NSObject, URLSessionDownloadDelegate, Send
         downloadTask: URLSessionDownloadTask,
         didFinishDownloadingTo location: URL
     ) {
-        // Handled by the async call
+        // Required but handled by async API
     }
 
     func urlSession(
