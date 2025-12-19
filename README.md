@@ -1,4 +1,6 @@
-# SWSharp 🔮
+# SWSharp
+
+(Vibe coded with Pi: https://github.com/badlogic/pi-mono)
 
 Swift/Metal port of SHARP ([Paper](https://arxiv.org/abs/2512.10685)/[GitHub](https://github.com/apple/ml-sharp)) - Monocular 3D Gaussian Prediction.
 
