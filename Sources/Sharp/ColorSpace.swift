@@ -1,3 +1,4 @@
+#if !arch(x86_64)
 import Foundation
 import simd
 
@@ -26,3 +27,4 @@ let sphericalHarmonicsDegree0Coefficient: Float = sqrt(1.0 / (4.0 * .pi))
 func rgbToSphericalHarmonics(_ rgb: SIMD3<Float>) -> SIMD3<Float> {
     (rgb - 0.5) / sphericalHarmonicsDegree0Coefficient
 }
+#endif

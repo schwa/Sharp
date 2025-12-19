@@ -1,3 +1,4 @@
+#if !arch(x86_64)
 import CoreGraphics
 import CoreML
 import Foundation
@@ -189,3 +190,4 @@ final class SharpPredictor: @unchecked Sendable {
         )
     }
 }
+#endif

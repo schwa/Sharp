@@ -1,3 +1,4 @@
+#if !arch(x86_64)
 import Foundation
 
 func sigmoid(_ x: Float) -> Float {
@@ -11,3 +12,4 @@ func inverseSigmoid(_ x: Float) -> Float {
 func clamp<T: Comparable>(_ value: T, min minValue: T, max maxValue: T) -> T {
     min(max(value, minValue), maxValue)
 }
+#endif

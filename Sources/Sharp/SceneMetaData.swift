@@ -1,3 +1,4 @@
+#if !arch(x86_64)
 import Foundation
 import simd
 
@@ -93,3 +94,4 @@ func computeUnprojectionMatrix(
     let projectionMatrix = ndcMatrix * intrinsics.matrix * extrinsics.matrix
     return projectionMatrix.inverse
 }
+#endif

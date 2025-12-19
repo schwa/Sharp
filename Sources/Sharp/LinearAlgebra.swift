@@ -1,3 +1,4 @@
+#if !arch(x86_64)
 import Accelerate
 import Foundation
 import simd
@@ -58,3 +59,4 @@ func composeCovarianceMatrix(quaternion: SIMD4<Float>, singularValues: SIMD3<Flo
     let diagonal = simd_float3x3(diagonal: singularValues * singularValues)
     return rotation * diagonal * rotation.transpose
 }
+#endif

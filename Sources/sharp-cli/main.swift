@@ -1,3 +1,4 @@
+#if !arch(x86_64)
 import ArgumentParser
 import Foundation
 import Sharp
@@ -63,7 +64,7 @@ struct SharpCLI: AsyncParsableCommand {
             sharp = try await Sharp.download(from: modelURL, to: cacheURL) { progress in
                 let percent = Int(progress * 100)
                 if percent % 10 == 0 {
-                    print("   Downloading: \(percent)%", terminator: "\r")
+                    print("   Downloading: \(percent)%", terminator: "")
                     fflush(stdout)
                 }
             }
@@ -125,3 +126,4 @@ extension FileManager {
         return fileExists(atPath: url.path, isDirectory: &isDir) && isDir.boolValue
     }
 }
+#endif

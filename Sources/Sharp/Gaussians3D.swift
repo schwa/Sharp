@@ -1,3 +1,4 @@
+#if !arch(x86_64)
 import Foundation
 import simd
 
@@ -122,3 +123,4 @@ func quaternionFromRotationMatrix(_ m: simd_float3x3) -> SIMD4<Float> {
 
     return SIMD4(w, x, y, z)
 }
+#endif

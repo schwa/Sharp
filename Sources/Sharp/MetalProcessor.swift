@@ -1,3 +1,4 @@
+#if !arch(x86_64)
 import CoreML
 import Foundation
 import Metal
@@ -169,5 +170,4 @@ enum MetalError: Error, LocalizedError {
         }
     }
 }
-
-
+#endif

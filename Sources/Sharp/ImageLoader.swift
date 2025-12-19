@@ -1,3 +1,4 @@
+#if !arch(x86_64)
 import CoreGraphics
 import Foundation
 import ImageIO
@@ -240,3 +241,4 @@ func resizeImage(_ image: LoadedImage, to targetWidth: Int, targetHeight: Int) -
         focalLengthPx: scaledFocal
     )
 }
+#endif

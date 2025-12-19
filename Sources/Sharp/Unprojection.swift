@@ -1,3 +1,4 @@
+#if !arch(x86_64)
 import Foundation
 import simd
 
@@ -78,3 +79,4 @@ func unprojectGaussians(
         imageHeight: imageHeight
     )
 }
+#endif

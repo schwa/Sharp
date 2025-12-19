@@ -1,3 +1,4 @@
+#if !arch(x86_64)
 import Foundation
 import ZIPFoundation
 
@@ -276,3 +277,4 @@ public func generateGaussianSplat(
     let sharp = try Sharp(modelURL: modelURL)
     try sharp.convert(from: imageURL, to: outputURL, options: options)
 }
+#endif

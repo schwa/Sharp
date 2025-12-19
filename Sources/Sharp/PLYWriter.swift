@@ -1,3 +1,4 @@
+#if !arch(x86_64)
 import Foundation
 import simd
 
@@ -162,3 +163,4 @@ private func appendInt32(_ data: inout Data, _ value: Int32) {
     var v = value
     withUnsafeBytes(of: &v) { data.append(contentsOf: $0) }
 }
+#endif
