@@ -97,6 +97,29 @@ public struct Sharp: Sendable {
         )
     }
 
+    /// Convert an image to 3D Gaussian splats and save as PLY
+    /// - Parameters:
+    ///   - imageData: input image data
+    ///   - outputURL: URL to save the output PLY file
+    ///   - options: Conversion options
+    public func convert(
+        from imageData: Data,
+        to outputURL: URL,
+        options: SharpOptions = SharpOptions()
+    ) throws {
+        let image = try loadImage(from: imageData)
+        let gaussians = try predictor.predict(image: image, verbose: options.verbose)
+
+        try savePLY(
+            gaussians,
+            focalLengthPx: image.focalLengthPx,
+            imageWidth: image.width,
+            imageHeight: image.height,
+            to: outputURL,
+            colorSpace: options.colorSpace
+        )
+    }
+
     /// Convert an image to 3D Gaussian splats
     /// - Parameters:
     ///   - imageURL: URL of the input image
@@ -107,6 +130,20 @@ public struct Sharp: Sendable {
         options: SharpOptions = SharpOptions()
     ) throws -> (gaussians: Gaussians3D, image: LoadedImage) {
         let image = try loadImage(from: imageURL)
+        let gaussians = try predictor.predict(image: image, verbose: options.verbose)
+        return (gaussians, image)
+    }
+
+    /// Convert an image to 3D Gaussian splats
+    /// - Parameters:
+    ///   - imageData: input image data
+    ///   - options: Conversion options
+    /// - Returns: The generated Gaussians and image metadata
+    public func convert(
+        from imageData: Data,
+        options: SharpOptions = SharpOptions()
+    ) throws -> (gaussians: Gaussians3D, image: LoadedImage) {
+        let image = try loadImage(from: imageData)
         let gaussians = try predictor.predict(image: image, verbose: options.verbose)
         return (gaussians, image)
     }

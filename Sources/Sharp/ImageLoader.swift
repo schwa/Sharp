@@ -87,6 +87,35 @@ func loadImage(
     )
 }
 
+/// Load an image from data
+func loadImage(
+    from data: Data,
+    defaultFocalLengthMultiplier: Float = 1.2
+) throws -> LoadedImage {
+    guard let imageSource = CGImageSourceCreateWithData(data as CFData, nil) else {
+        throw ImageLoadError.invalidImageData
+    }
+
+    guard let cgImage = CGImageSourceCreateImageAtIndex(imageSource, 0, nil) else {
+        throw ImageLoadError.cgImageCreationFailed
+    }
+
+    let width = cgImage.width
+    let height = cgImage.height
+
+    let focalLengthPx = extractFocalLength(from: imageSource, imageWidth: width, imageHeight: height)
+    ?? (Float(width) * defaultFocalLengthMultiplier)
+
+    let pixels = try extractRGBPixels(from: cgImage)
+
+    return LoadedImage(
+        pixels: pixels,
+        width: width,
+        height: height,
+        focalLengthPx: focalLengthPx
+    )
+}
+
 private func extractFocalLength(from source: CGImageSource, imageWidth: Int, imageHeight: Int) -> Float? {
     guard let properties = CGImageSourceCopyPropertiesAtIndex(source, 0, nil) as? [CFString: Any] else {
         return nil

@@ -20,7 +20,7 @@ enum PLYWriteError: Error, LocalizedError {
 }
 
 /// Save Gaussians to PLY file format
-func savePLY(
+public func savePLY(
     _ gaussians: Gaussians3D,
     focalLengthPx: Float,
     imageWidth: Int,
